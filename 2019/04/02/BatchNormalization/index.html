@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="钢蛋">
 <meta property="og:description" content="Why do we need batch normalization?We normalize the input layer by adjusting and scaling the activations. For example, when we have features from 0 to 1 and some from 1 to 1000, we should normalize th">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-02T09:28:04.125Z">
+<meta property="og:updated_time" content="2019-04-02T12:17:45.554Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="BatchNormalization">
 <meta name="twitter:description" content="Why do we need batch normalization?We normalize the input layer by adjusting and scaling the activations. For example, when we have features from 0 to 1 and some from 1 to 1000, we should normalize th">
@@ -366,7 +366,7 @@
                 
               
 
-              <time title="创建时间：2019-04-02 14:11:23 / 修改时间：17:28:04" itemprop="dateCreated datePublished" datetime="2019-04-02T14:11:23+08:00">2019-04-02</time>
+              <time title="创建时间：2019-04-02 14:11:23 / 修改时间：20:17:45" itemprop="dateCreated datePublished" datetime="2019-04-02T14:11:23+08:00">2019-04-02</time>
             
 
             
@@ -408,7 +408,7 @@
         <h2 id="Why-do-we-need-batch-normalization"><a href="#Why-do-we-need-batch-normalization" class="headerlink" title="Why do we need batch normalization?"></a>Why do we need batch normalization?</h2><p>We normalize the input layer by adjusting and scaling the activations. For example, when we have features from 0 to 1 and some from 1 to 1000, we should normalize them to speed up learning. If the input layer is benefiting from it, why not do the same thing also for the values in the hidden layers, that are changing all the time, and get 10 times or more improvement in the training speed.</p>
 <p>Batch normalization reduces the amount by what the hidden unit values shift around (covariance shift). To explain covariance shift, let’s have a deep network on cat detection. We train our data on only black cats’ images. So, if we now try to apply this network to data with colored cats, it is obvious; we’re not going to do well. The training set and the prediction set are both cats’ images but they differ a little bit. In other words, if an algorithm learned some X to Y mapping, and if the distribution of X changes, then we might need to retrain the learning algorithm by trying to align the distribution of X with the distribution of Y. ( Deeplearning.ai: Why Does Batch Norm Work?<a href="https://www.youtube.com/watch?v=nUUqwaxLnWs" target="_blank" rel="noopener">C2W3L06</a></p>
 <p>Also, batch normalization allows each layer of a network to learn by itself a<br>little bit more independently of other layers.</p>
-<h2 id="How-dose-batch-normalization-work"><a href="#How-dose-batch-normalization-work" class="headerlink" title="How dose batch normalization work?"></a>How dose batch normalization work?</h2><h2 id="Referrence"><a href="#Referrence" class="headerlink" title="Referrence"></a>Referrence</h2><p><a href="https://towardsdatascience.com/batch-normalization-in-neural-networks-1ac91516821c" target="_blank" rel="noopener">Batch normalization in Neural Networks</a></p>
+<h2 id="How-dose-batch-normalization-work"><a href="#How-dose-batch-normalization-work" class="headerlink" title="How dose batch normalization work?"></a>How dose batch normalization work?</h2><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://towardsdatascience.com/batch-normalization-in-neural-networks-1ac91516821c" target="_blank" rel="noopener">Batch normalization in Neural Networks</a></p>
 
       
     </div>
@@ -606,7 +606,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Why-do-we-need-batch-normalization"><span class="nav-number">1.</span> <span class="nav-text">Why do we need batch normalization?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How-dose-batch-normalization-work"><span class="nav-number">2.</span> <span class="nav-text">How dose batch normalization work?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Referrence"><span class="nav-number">3.</span> <span class="nav-text">Referrence</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Why-do-we-need-batch-normalization"><span class="nav-number">1.</span> <span class="nav-text">Why do we need batch normalization?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How-dose-batch-normalization-work"><span class="nav-number">2.</span> <span class="nav-text">How dose batch normalization work?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">3.</span> <span class="nav-text">Reference</span></a></li></ol></div>
             
 
           </div>
