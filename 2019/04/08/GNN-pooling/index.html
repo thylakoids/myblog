@@ -96,25 +96,25 @@
 
 
 
-  <meta name="description" content="字符 描述     (?:pattern) 匹配 pattern 但不获取匹配结果，也就是说这是一个非获取匹配，不进行存储供以后使用。这在使用 “或” 字符 (&amp;#124;) 来组合一个模式的各个部分是很有用。例如， ‘industr(?:y&amp;#124;ies) 就是一个比 ‘industry&amp;#124;industries’ 更简略的表达式。   ? 当该字符紧跟在任何一个其他限制符(*">
-<meta name="keywords" content="python,regular expression">
+  <meta name="description" content="IntroductionA major limitation of current GNN architectures is that they are inherentlyflat as they only propagate information across the edges of the graph andunable to infer and aggregate the inform">
+<meta name="keywords" content="graph convolutional network,deep learning">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Regularexpression">
-<meta property="og:url" content="http://yoursite.com/2019/04/04/regularexpression/index.html">
+<meta property="og:title" content="Differentiable Pooling">
+<meta property="og:url" content="http://yoursite.com/2019/04/08/GNN-pooling/index.html">
 <meta property="og:site_name" content="努比">
-<meta property="og:description" content="字符 描述     (?:pattern) 匹配 pattern 但不获取匹配结果，也就是说这是一个非获取匹配，不进行存储供以后使用。这在使用 “或” 字符 (&amp;#124;) 来组合一个模式的各个部分是很有用。例如， ‘industr(?:y&amp;#124;ies) 就是一个比 ‘industry&amp;#124;industries’ 更简略的表达式。   ? 当该字符紧跟在任何一个其他限制符(*">
+<meta property="og:description" content="IntroductionA major limitation of current GNN architectures is that they are inherentlyflat as they only propagate information across the edges of the graph andunable to infer and aggregate the inform">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-04T04:14:36.139Z">
+<meta property="og:updated_time" content="2019-04-08T06:31:39.546Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Regularexpression">
-<meta name="twitter:description" content="字符 描述     (?:pattern) 匹配 pattern 但不获取匹配结果，也就是说这是一个非获取匹配，不进行存储供以后使用。这在使用 “或” 字符 (&amp;#124;) 来组合一个模式的各个部分是很有用。例如， ‘industr(?:y&amp;#124;ies) 就是一个比 ‘industry&amp;#124;industries’ 更简略的表达式。   ? 当该字符紧跟在任何一个其他限制符(*">
+<meta name="twitter:title" content="Differentiable Pooling">
+<meta name="twitter:description" content="IntroductionA major limitation of current GNN architectures is that they are inherentlyflat as they only propagate information across the edges of the graph andunable to infer and aggregate the inform">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/04/04/regularexpression/">
+  <link rel="canonical" href="http://yoursite.com/2019/04/08/GNN-pooling/">
 
 
 
@@ -124,7 +124,7 @@
   };
 </script>
 
-  <title>Regularexpression | 努比</title>
+  <title>Differentiable Pooling | 努比</title>
   
 
 
@@ -323,7 +323,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/04/regularexpression/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/08/GNN-pooling/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="thylakoids">
@@ -340,7 +340,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Regularexpression
+          <h1 class="post-title" itemprop="name headline">Differentiable Pooling
 
               
             
@@ -366,7 +366,7 @@
                 
               
 
-              <time title="创建时间：2019-04-04 09:52:21 / 修改时间：12:14:36" itemprop="dateCreated datePublished" datetime="2019-04-04T09:52:21+08:00">2019-04-04</time>
+              <time title="创建时间：2019-04-08 14:22:17 / 修改时间：14:31:39" itemprop="dateCreated datePublished" datetime="2019-04-08T14:22:17+08:00">2019-04-08</time>
             
 
             
@@ -405,26 +405,7 @@
       
 
       
-        <div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:left">字符</th>
-<th style="text-align:left">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">(?:pattern)</td>
-<td style="text-align:left">匹配 pattern 但不获取匹配结果，也就是说这是一个非获取匹配，不进行存储供以后使用。这在使用 “或” 字符 (&#124;) 来组合一个模式的各个部分是很有用。例如， ‘industr(?:y&#124;ies) 就是一个比 ‘industry&#124;industries’ 更简略的表达式。</td>
-</tr>
-<tr>
-<td style="text-align:left">?</td>
-<td style="text-align:left">当该字符紧跟在任何一个其他限制符(*,+,?,{n},{n,},{n,m})后面时，匹配模式是非贪婪的。非贪婪模式尽可能少的匹配所搜索的字符串，而默认的贪婪模式则尽可能多的匹配所搜索的字符串。例如，对于字符串”oooo”，’o+?’将匹配单个 “o”，而 ‘o+’ 将匹配所有 ‘o’。</td>
-</tr>
-</tbody>
-</table>
-</div>
+        <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>A major limitation of current GNN architectures is that they are inherently<br><em>flat</em> as they only propagate information across the edges of the graph and<br>unable to infer and aggregate the information in a <em>hierarchical</em> way. This<br>lack of hierarchical structure is especially problematic of the task of<br>graph classification, where the goal is to predict the label associated with<br>an entire graph.</p>
 
       
     </div>
@@ -448,9 +429,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/python/" rel="tag"># python</a>
+            <a href="/tags/graph-convolutional-network/" rel="tag"># graph convolutional network</a>
           
-            <a href="/tags/regular-expression/" rel="tag"># regular expression</a>
+            <a href="/tags/deep-learning/" rel="tag"># deep learning</a>
           
         </div>
       
@@ -463,8 +444,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/02/latex/" rel="next" title="Latex Tutorial">
-                <i class="fa fa-chevron-left"></i> Latex Tutorial
+              <a href="/2019/04/04/GCNnote/" rel="next" title="GCN Note">
+                <i class="fa fa-chevron-left"></i> GCN Note
               </a>
             
           </div>
@@ -472,10 +453,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/04/04/gif-on-mac/" rel="prev" title="Gif on Mac">
-                Gif on Mac <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -519,8 +496,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -614,6 +600,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
@@ -753,7 +756,66 @@
   
 
 
-  <script src="/js/src/bootstrap.js?v=7.0.0"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+  <script src="/js/src/bootstrap.js?v=7.0.0"></script>
+
+
+  
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+  overflow: auto hidden;
+}
+</style><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config("");
 </script>
@@ -772,29 +834,7 @@
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
 
-
-  
-  
-
-
-  
-
-
-  
-
-
-
-
-  
-
-  
-
-  
-  
-
-  
-  
-
+    
   
 
 
