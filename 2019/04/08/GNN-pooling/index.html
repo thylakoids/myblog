@@ -97,14 +97,14 @@
 
 
   <meta name="description" content="IntroductionA major limitation of current GNN architectures is that they are inherentlyflat as they only propagate information across the edges of the graph andunable to infer and aggregate the inform">
-<meta name="keywords" content="graph convolutional network,deep learning">
+<meta name="keywords" content="deep learning,graph convolutional network">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Differentiable Pooling">
 <meta property="og:url" content="http://yoursite.com/2019/04/08/GNN-pooling/index.html">
-<meta property="og:site_name" content="努比">
+<meta property="og:site_name" content="Dracarys">
 <meta property="og:description" content="IntroductionA major limitation of current GNN architectures is that they are inherentlyflat as they only propagate information across the edges of the graph andunable to infer and aggregate the inform">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-08T06:31:39.546Z">
+<meta property="og:updated_time" content="2019-04-08T15:37:39.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Differentiable Pooling">
 <meta name="twitter:description" content="IntroductionA major limitation of current GNN architectures is that they are inherentlyflat as they only propagate information across the edges of the graph andunable to infer and aggregate the inform">
@@ -124,7 +124,7 @@
   };
 </script>
 
-  <title>Differentiable Pooling | 努比</title>
+  <title>Differentiable Pooling | Dracarys</title>
   
 
 
@@ -183,7 +183,7 @@
     <div class="custom-logo-site-title">
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">努比</span>
+        <span class="site-title">Dracarys</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -332,7 +332,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="努比">
+      <meta itemprop="name" content="Dracarys">
     </span>
 
     
@@ -366,7 +366,7 @@
                 
               
 
-              <time title="创建时间：2019-04-08 14:22:17 / 修改时间：14:31:39" itemprop="dateCreated datePublished" datetime="2019-04-08T14:22:17+08:00">2019-04-08</time>
+              <time title="创建时间：2019-04-08 14:22:17 / 修改时间：23:37:39" itemprop="dateCreated datePublished" datetime="2019-04-08T14:22:17+08:00">2019-04-08</time>
             
 
             
@@ -406,7 +406,17 @@
 
       
         <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>A major limitation of current GNN architectures is that they are inherently<br><em>flat</em> as they only propagate information across the edges of the graph and<br>unable to infer and aggregate the information in a <em>hierarchical</em> way. This<br>lack of hierarchical structure is especially problematic of the task of<br>graph classification, where the goal is to predict the label associated with<br>an entire graph.</p>
-
+<p>The challenge in the GNN setting—compared to standard CNNs—is that graphs<br>contain no natural notion of spatial locality.</p>
+<h2 id="Proposed-Method"><a href="#Proposed-Method" class="headerlink" title="Proposed Method"></a>Proposed Method</h2><h3 id="Preliminaries"><a href="#Preliminaries" class="headerlink" title="Preliminaries"></a>Preliminaries</h3><p>We represent a graph $G$ as $(A, F)$, where $A \in \{0, 1\}^{n\times{n}}$ is the adjacency matrix, and $F \in \mathbb{R}^{n\times{d}}$</p>
+<p><strong>Graph neural networks</strong></p>
+<script type="math/tex; mode=display">H^{(k)} = M(A,H^{(k-1)};\theta^{(k)}),</script><p>GCNs:</p>
+<script type="math/tex; mode=display">H^{(k)} =  ReLU(\tilde{D}^{-\frac{1}{2}}) \tilde{A} \tilde{D}^{-\frac{1}{2}} H^{(k-1)}W^{(k-1)},</script><p><strong>Stacking GNNs and pooling layers</strong></p>
+<p>The goal is to learn how to cluster or pool together nodes using the output of<br>a GNN, so that we can use this coarsened graph as input to another GNN layer.</p>
+<h3 id="Differentiable-Pooling-via-Learned-Assignments"><a href="#Differentiable-Pooling-via-Learned-Assignments" class="headerlink" title="Differentiable Pooling via Learned Assignments"></a>Differentiable Pooling via Learned Assignments</h3><p><strong>Pooling with an assignment matrix</strong></p>
+<script type="math/tex; mode=display">S^{(l)} \in \mathbb{R}^{n_l\times{n_{l+1}}}</script><p>Each row of $S^{(l)}$ corresponds to one of the $ n_l$ nodes(or clusters) at<br>layer $l$, and each column of $S^{l}$ corresponds to one of the $n_{l+1}$<br>clusters at the next layer $l+1$. Intuitively, $S^{(l)}$ provides a soft<br>assignment of each node at layer $l$ to a cluster in the next coarsened layer<br>$l + 1$</p>
+<script type="math/tex; mode=display">(A^{(l+1)}, w^{(l+1)})= DIFFPOOL(A^{(l)}, Z^{(l)})</script><p>In particular, we apply the two folllowing equations:</p>
+<script type="math/tex; mode=display">X^{(l+1)} = {S^{(l)}}^TZ^{(l)}</script><script type="math/tex; mode=display">A^{(l+1)} = {S^{(l)}}^TA^{(l)}S^{(l)}</script><p><strong>Leaning the assignment matrix</strong></p>
+<script type="math/tex; mode=display">Z^{(l)}=GNN_{l,embed}(A^{(l)}, X^{(l)})</script>
       
     </div>
 
@@ -429,9 +439,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/graph-convolutional-network/" rel="tag"># graph convolutional network</a>
-          
             <a href="/tags/deep-learning/" rel="tag"># deep learning</a>
+          
+            <a href="/tags/graph-convolutional-network/" rel="tag"># graph convolutional network</a>
           
         </div>
       
@@ -453,6 +463,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/06/DIY主机-系统/" rel="prev" title="DIY主机+系统">
+                DIY主机+系统 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -521,7 +535,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-count">12</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -575,7 +589,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">10</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -611,7 +629,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Proposed-Method"><span class="nav-number">2.</span> <span class="nav-text">Proposed Method</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Preliminaries"><span class="nav-number">2.1.</span> <span class="nav-text">Preliminaries</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Differentiable-Pooling-via-Learned-Assignments"><span class="nav-number">2.2.</span> <span class="nav-text">Differentiable Pooling via Learned Assignments</span></a></li></ol></li></ol></div>
             
 
           </div>

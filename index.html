@@ -97,12 +97,12 @@
 
 
   <meta property="og:type" content="website">
-<meta property="og:title" content="努比">
+<meta property="og:title" content="Dracarys">
 <meta property="og:url" content="http://yoursite.com/index.html">
-<meta property="og:site_name" content="努比">
+<meta property="og:site_name" content="Dracarys">
 <meta property="og:locale" content="zh-CN">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="努比">
+<meta name="twitter:title" content="Dracarys">
 
 
 
@@ -119,7 +119,7 @@
   };
 </script>
 
-  <title>努比</title>
+  <title>Dracarys</title>
   
 
 
@@ -179,7 +179,7 @@
     <div class="custom-logo-site-title">
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">努比</span>
+        <span class="site-title">Dracarys</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -319,6 +319,175 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/06/DIY主机-系统/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="thylakoids">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dracarys">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/07/06/DIY主机-系统/" class="post-title-link" itemprop="url">DIY主机+系统</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-07-06 08:47:52 / 修改时间：09:43:13" itemprop="dateCreated datePublished" datetime="2019-07-06T08:47:52+08:00">2019-07-06</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="组装电脑遇到的坑"><a href="#组装电脑遇到的坑" class="headerlink" title="组装电脑遇到的坑"></a>组装电脑遇到的坑</h2><h3 id="内存安装"><a href="#内存安装" class="headerlink" title="内存安装"></a>内存安装</h3><p>主板(msiB450)上有4个DIMM插槽，我有两条内存。一开始我把内存插在靠近cpu的两个插槽<br>上，电脑开不了机，主板显示内存问题。拔掉任意一条内存都可以正常开机。后来看了主板<br>说明书才知道，<strong>插槽分为DIMM1和DIMM2，从靠近CPU的位置数起，4个插槽分别微DIMMA1,<br>DIMMA2, DIMMB1, DIMMB2。安装内存条必须先由DIMMA2插槽开始安装,如果安装两条内存建<br>议是DIMMA2和DIMMB2</strong>， 这样按说明书装在DIMMA2和DIMMB2后顺利开机。</p>
+<h2 id="双SSD双系统安装"><a href="#双SSD双系统安装" class="headerlink" title="双SSD双系统安装"></a>双SSD双系统安装</h2><p><strong><em>电脑上装了两块SSD， 计划一块装windows， 一快装Ubuntu。</em></strong></p>
+<h3 id="在其中一块盘上装好windows"><a href="#在其中一块盘上装好windows" class="headerlink" title="在其中一块盘上装好windows"></a>在其中一块盘上装好windows</h3><p>由于只有独显，需要把显示器接到显卡输出口才有显示。</p>
+<h3 id="UltrOS-制作UbuntuU盘启动盘"><a href="#UltrOS-制作UbuntuU盘启动盘" class="headerlink" title="UltrOS 制作UbuntuU盘启动盘"></a>UltrOS 制作UbuntuU盘启动盘</h3><p>记得选RAM</p>
+<h3 id="用U盘安装Ubuntu"><a href="#用U盘安装Ubuntu" class="headerlink" title="用U盘安装Ubuntu"></a>用U盘安装Ubuntu</h3><ul>
+<li>开机按Delete进入BIOS选择U盘启动（把U盘优先级调到最高）</li>
+<li><p>电脑只有Nvidia显卡，安装Ubuntu会黑屏，这是因为ubuntu对显卡的支持有关，需要手动<br>添加显卡选项:<code>nomodeset</code>，使其支持Nvidia系列显卡。</p>
+</li>
+<li><p>进入安装时，光标移动到<code>install ubuntu</code>，按<code>e</code>进入编辑模式，进入命令行模式,找<br>到<code>quite splash</code>然后去掉<code>--</code>后，添加<code>nomodeset</code>（依照不同显卡进行不同显卡<br>驱动选项的添加，我们使用的是Nvidia显卡，添加nomodeset）F10安装</p>
+</li>
+<li><p>安装结束后，重启时，电脑此时的启动顺序是U盘&gt;windows盘&gt;linux盘，<br>  所以我们需要进入BIOS调整启动顺序为linux盘&gt;windows盘&gt;U盘。</p>
+</li>
+<li><p>顺利进入grub画面后，按<code>e</code> 进入编辑开机指令的模式, 同样找到<code>quitesplash</code>并在<br>后面加上<code>nomodeset</code>，按F10启动系统。</p>
+</li>
+<li><p>为了避免每次开机都要改启动命令，我们需要永久修改grub启动命令。开机后进入系统<br>打开终端</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vi /etc/default/grub</span><br></pre></td></tr></table></figure>
+<p>  按<code>i</code>进入vi的编辑模式</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GRUB_CMDLINE_LINUX_DEFAULT=&quot;quiet splash&quot;</span><br><span class="line">#修改为：</span><br><span class="line">GRUB_CMDLINE_LINUX_DEFAULT=&quot;quiet splash nomodeset&quot;</span><br></pre></td></tr></table></figure>
+<p>  按<code>esc</code>, 输入<code>:wq!</code>保存， 更新grub</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo update-grub</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在重启之前，我们发现电脑屏幕分辨率不是最佳（如果分辨率正常，则不用）</p>
+</li>
+</ul>
+<p>点击右上角“系统设置—&gt;软件和更新—&gt;附加驱动”选择使用Nvidia驱动</p>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p>微星主板说明书</p>
+<p><a href="https://blog.csdn.net/cheneykl/article/details/79111618" target="_blank" rel="noopener">安装ubuntu时黑屏三种解决办法</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/08/GNN-pooling/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -328,7 +497,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="努比">
+      <meta itemprop="name" content="Dracarys">
     </span>
 
     
@@ -364,7 +533,7 @@
                 
               
 
-              <time title="创建时间：2019-04-08 14:22:17 / 修改时间：14:31:39" itemprop="dateCreated datePublished" datetime="2019-04-08T14:22:17+08:00">2019-04-08</time>
+              <time title="创建时间：2019-04-08 14:22:17 / 修改时间：23:37:39" itemprop="dateCreated datePublished" datetime="2019-04-08T14:22:17+08:00">2019-04-08</time>
             
 
             
@@ -406,7 +575,17 @@
         
           
             <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>A major limitation of current GNN architectures is that they are inherently<br><em>flat</em> as they only propagate information across the edges of the graph and<br>unable to infer and aggregate the information in a <em>hierarchical</em> way. This<br>lack of hierarchical structure is especially problematic of the task of<br>graph classification, where the goal is to predict the label associated with<br>an entire graph.</p>
-
+<p>The challenge in the GNN setting—compared to standard CNNs—is that graphs<br>contain no natural notion of spatial locality.</p>
+<h2 id="Proposed-Method"><a href="#Proposed-Method" class="headerlink" title="Proposed Method"></a>Proposed Method</h2><h3 id="Preliminaries"><a href="#Preliminaries" class="headerlink" title="Preliminaries"></a>Preliminaries</h3><p>We represent a graph $G$ as $(A, F)$, where $A \in \{0, 1\}^{n\times{n}}$ is the adjacency matrix, and $F \in \mathbb{R}^{n\times{d}}$</p>
+<p><strong>Graph neural networks</strong></p>
+<script type="math/tex; mode=display">H^{(k)} = M(A,H^{(k-1)};\theta^{(k)}),</script><p>GCNs:</p>
+<script type="math/tex; mode=display">H^{(k)} =  ReLU(\tilde{D}^{-\frac{1}{2}}) \tilde{A} \tilde{D}^{-\frac{1}{2}} H^{(k-1)}W^{(k-1)},</script><p><strong>Stacking GNNs and pooling layers</strong></p>
+<p>The goal is to learn how to cluster or pool together nodes using the output of<br>a GNN, so that we can use this coarsened graph as input to another GNN layer.</p>
+<h3 id="Differentiable-Pooling-via-Learned-Assignments"><a href="#Differentiable-Pooling-via-Learned-Assignments" class="headerlink" title="Differentiable Pooling via Learned Assignments"></a>Differentiable Pooling via Learned Assignments</h3><p><strong>Pooling with an assignment matrix</strong></p>
+<script type="math/tex; mode=display">S^{(l)} \in \mathbb{R}^{n_l\times{n_{l+1}}}</script><p>Each row of $S^{(l)}$ corresponds to one of the $ n_l$ nodes(or clusters) at<br>layer $l$, and each column of $S^{l}$ corresponds to one of the $n_{l+1}$<br>clusters at the next layer $l+1$. Intuitively, $S^{(l)}$ provides a soft<br>assignment of each node at layer $l$ to a cluster in the next coarsened layer<br>$l + 1$</p>
+<script type="math/tex; mode=display">(A^{(l+1)}, w^{(l+1)})= DIFFPOOL(A^{(l)}, Z^{(l)})</script><p>In particular, we apply the two folllowing equations:</p>
+<script type="math/tex; mode=display">X^{(l+1)} = {S^{(l)}}^TZ^{(l)}</script><script type="math/tex; mode=display">A^{(l+1)} = {S^{(l)}}^TA^{(l)}S^{(l)}</script><p><strong>Leaning the assignment matrix</strong></p>
+<script type="math/tex; mode=display">Z^{(l)}=GNN_{l,embed}(A^{(l)}, X^{(l)})</script>
           
         
       
@@ -471,7 +650,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="努比">
+      <meta itemprop="name" content="Dracarys">
     </span>
 
     
@@ -658,7 +837,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="努比">
+      <meta itemprop="name" content="Dracarys">
     </span>
 
     
@@ -820,7 +999,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="努比">
+      <meta itemprop="name" content="Dracarys">
     </span>
 
     
@@ -964,7 +1143,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="努比">
+      <meta itemprop="name" content="Dracarys">
     </span>
 
     
@@ -1128,7 +1307,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="努比">
+      <meta itemprop="name" content="Dracarys">
     </span>
 
     
@@ -1290,7 +1469,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="努比">
+      <meta itemprop="name" content="Dracarys">
     </span>
 
     
@@ -1441,7 +1620,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="努比">
+      <meta itemprop="name" content="Dracarys">
     </span>
 
     
@@ -1642,7 +1821,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="努比">
+      <meta itemprop="name" content="Dracarys">
     </span>
 
     
@@ -1817,207 +1996,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/28/LaTeX_in_markdown/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="thylakoids">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="努比">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/02/28/LaTeX_in_markdown/" class="post-title-link" itemprop="url">LaTeX in Markdown</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-02-28 14:15:13" itemprop="dateCreated datePublished" datetime="2019-02-28T14:15:13+08:00">2019-02-28</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-04-04 12:30:21" itemprop="dateModified" datetime="2019-04-04T12:30:21+08:00">2019-04-04</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/markdown/" itemprop="url" rel="index"><span itemprop="name">markdown</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="MarkDonw-中使用Latex数学公式"><a href="#MarkDonw-中使用Latex数学公式" class="headerlink" title="MarkDonw 中使用Latex数学公式"></a>MarkDonw 中使用Latex数学公式</h2><h3 id="方法一：使用google-Chart的服务器"><a href="#方法一：使用google-Chart的服务器" class="headerlink" title="方法一：使用google Chart的服务器"></a>方法一：使用google Chart的服务器</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"http://chart.googleapis.com/chart?cht=tx&amp;chl=\Large x=\frac&#123;-b\pm\sqrt&#123;b^2-4ac&#125;&#125;&#123;2a&#125;"</span> <span class="attr">style</span>=<span class="string">"border:none;"</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>显示结果为：<br><img src="http://chart.googleapis.com/chart?cht=tx&chl=\Large x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}" style="border:none;"></p>
-<h3 id="方法二：使用MathJax引擎"><a href="#方法二：使用MathJax引擎" class="headerlink" title="方法二：使用MathJax引擎"></a>方法二：使用MathJax引擎</h3><p>大家都看过Stackoverflow上的公式吧，漂亮，其生成的不是图片。这就要用到MathJax引擎，在Markdown中添加MathJax引擎也很简单，<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>如下代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$$x=\frac&#123;-b\pm\sqrt&#123;b^2-4ac&#125;&#125;&#123;2a&#125;$$</span><br><span class="line">\\[x=\frac&#123;-b\pm\sqrt&#123;b^2-4ac&#125;&#125;&#123;2a&#125;\\]</span><br><span class="line">\\(x=\frac&#123;-b\pm\sqrt&#123;b^2-4ac&#125;&#125;&#123;2a&#125;\\)</span><br></pre></td></tr></table></figure></p>
-<p>分别显示为，行间公式：</p>
-<script type="math/tex; mode=display">x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}</script><p>\[x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}\]<br>行内公式：\(x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}\) </p>
-<h2 id="hexo-中使用Latex数学公式"><a href="#hexo-中使用Latex数学公式" class="headerlink" title="hexo 中使用Latex数学公式"></a>hexo 中使用Latex数学公式</h2><ol>
-<li><p>安装<code>hexo-math</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-math --save</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>然后编辑站点根目录下的_config.yml，添加</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">math:</span><br><span class="line">  engine: &apos;mathjax&apos; # or &apos;katex&apos;</span><br><span class="line">  mathjax:</span><br><span class="line">    src: custom_mathjax_source</span><br><span class="line">    config:</span><br><span class="line">      # MathJax config</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>之后进入theme的目录，编辑主题的_config.yml，找到mathjax字段。NexT 5.0.1中默认mathjax是禁用，需要改成</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mathjax:</span><br><span class="line">   enable: true</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在文档头部开启mathjax</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mathjax: true</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<hr>
-<p>例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$x=\frac&#123;-b\pm\sqrt&#123;b^2-4ac&#125;&#125;&#123;2a&#125;$</span><br></pre></td></tr></table></figure></p>
-<p>$x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$$x=\frac&#123;-b\pm\sqrt&#123;b^2-4ac&#125;&#125;&#123;2a&#125;$$</span><br></pre></td></tr></table></figure>
-<script type="math/tex; mode=display">x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}</script><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference:"></a>Reference:</h2><ol>
-<li><a href="https://blog.csdn.net/xiahouzuoxin/article/details/26478179" target="_blank" rel="noopener">Markdown中插入数学公式的方法</a></li>
-<li><a href="https://hiltmon.com/blog/2017/01/28/mathjax-in-markdown/" target="_blank" rel="noopener">MathJax in Markdown</a></li>
-<li><a href="https://introspelliam.github.io/2018/03/27/hexo/hexo%E4%BD%BF%E7%94%A8hexo-math%E6%8F%92%E4%BB%B6%E6%94%AF%E6%8C%81MathJax/" target="_blank" rel="noopener">hexo使用hexo-math插件支持MathJax</a></li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2064,7 +2042,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-count">12</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2118,7 +2096,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">10</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -2302,9 +2284,9 @@
   
     
       
-        
-      
     
+      
+        
       
     
       
