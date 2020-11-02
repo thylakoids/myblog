@@ -96,25 +96,25 @@
 
 
 
-  <meta name="description" content="字符 描述     (?:pattern) 匹配 pattern 但不获取匹配结果，也就是说这是一个非获取匹配，不进行存储供以后使用。这在使用 “或” 字符 (&amp;#124;) 来组合一个模式的各个部分是很有用。例如， ‘industr(?:y&amp;#124;ies) 就是一个比 ‘industry&amp;#124;industries’ 更简略的表达式。   ? 当该字符紧跟在任何一个其他限制符(*">
-<meta name="keywords" content="python,regular expression">
+  <meta name="description" content="Python中dis的用法dis库是python(默认的CPython)自带的一个库,可以用来分析[字节码][字节码] 利用dis来分析全局变量和局部变量运行效率. 123456789101112g = 2def local_var():    global g    l = g    for i in range(100000000):    i + ldef global_var():">
+<meta name="keywords" content="python,python package">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Regularexpression">
-<meta property="og:url" content="http://yoursite.com/2019/04/04/regularexpression/index.html">
+<meta property="og:title" content="Python Dis 模块">
+<meta property="og:url" content="http://yoursite.com/2020/11/02/python-dis-模块/index.html">
 <meta property="og:site_name" content="Dracarys">
-<meta property="og:description" content="字符 描述     (?:pattern) 匹配 pattern 但不获取匹配结果，也就是说这是一个非获取匹配，不进行存储供以后使用。这在使用 “或” 字符 (&amp;#124;) 来组合一个模式的各个部分是很有用。例如， ‘industr(?:y&amp;#124;ies) 就是一个比 ‘industry&amp;#124;industries’ 更简略的表达式。   ? 当该字符紧跟在任何一个其他限制符(*">
+<meta property="og:description" content="Python中dis的用法dis库是python(默认的CPython)自带的一个库,可以用来分析[字节码][字节码] 利用dis来分析全局变量和局部变量运行效率. 123456789101112g = 2def local_var():    global g    l = g    for i in range(100000000):    i + ldef global_var():">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-04T04:14:36.000Z">
+<meta property="og:updated_time" content="2020-11-02T13:53:56.027Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Regularexpression">
-<meta name="twitter:description" content="字符 描述     (?:pattern) 匹配 pattern 但不获取匹配结果，也就是说这是一个非获取匹配，不进行存储供以后使用。这在使用 “或” 字符 (&amp;#124;) 来组合一个模式的各个部分是很有用。例如， ‘industr(?:y&amp;#124;ies) 就是一个比 ‘industry&amp;#124;industries’ 更简略的表达式。   ? 当该字符紧跟在任何一个其他限制符(*">
+<meta name="twitter:title" content="Python Dis 模块">
+<meta name="twitter:description" content="Python中dis的用法dis库是python(默认的CPython)自带的一个库,可以用来分析[字节码][字节码] 利用dis来分析全局变量和局部变量运行效率. 123456789101112g = 2def local_var():    global g    l = g    for i in range(100000000):    i + ldef global_var():">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/04/04/regularexpression/">
+  <link rel="canonical" href="http://yoursite.com/2020/11/02/python-dis-模块/">
 
 
 
@@ -124,7 +124,7 @@
   };
 </script>
 
-  <title>Regularexpression | Dracarys</title>
+  <title>Python Dis 模块 | Dracarys</title>
   
 
 
@@ -323,7 +323,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/04/regularexpression/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/02/python-dis-模块/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="thylakoids">
@@ -340,7 +340,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Regularexpression
+          <h1 class="post-title" itemprop="name headline">Python Dis 模块
 
               
             
@@ -366,7 +366,7 @@
                 
               
 
-              <time title="创建时间：2019-04-04 09:52:21 / 修改时间：12:14:36" itemprop="dateCreated datePublished" datetime="2019-04-04T09:52:21+08:00">2019-04-04</time>
+              <time title="创建时间：2020-11-02 16:11:05 / 修改时间：21:53:56" itemprop="dateCreated datePublished" datetime="2020-11-02T16:11:05+08:00">2020-11-02</time>
             
 
             
@@ -376,6 +376,24 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -405,26 +423,13 @@
       
 
       
-        <div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:left">字符</th>
-<th style="text-align:left">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">(?:pattern)</td>
-<td style="text-align:left">匹配 pattern 但不获取匹配结果，也就是说这是一个非获取匹配，不进行存储供以后使用。这在使用 “或” 字符 (&#124;) 来组合一个模式的各个部分是很有用。例如， ‘industr(?:y&#124;ies) 就是一个比 ‘industry&#124;industries’ 更简略的表达式。</td>
-</tr>
-<tr>
-<td style="text-align:left">?</td>
-<td style="text-align:left">当该字符紧跟在任何一个其他限制符(*,+,?,{n},{n,},{n,m})后面时，匹配模式是非贪婪的。非贪婪模式尽可能少的匹配所搜索的字符串，而默认的贪婪模式则尽可能多的匹配所搜索的字符串。例如，对于字符串”oooo”，’o+?’将匹配单个 “o”，而 ‘o+’ 将匹配所有 ‘o’。</td>
-</tr>
-</tbody>
-</table>
-</div>
+        <h1 id="Python中dis的用法"><a href="#Python中dis的用法" class="headerlink" title="Python中dis的用法"></a>Python中dis的用法</h1><p>dis库是python(默认的CPython)自带的一个库,可以用来分析[字节码][字节码]</p>
+<p>利用dis来分析全局变量和局部变量运行效率.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">g = <span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">local_var</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">global</span> g</span><br><span class="line">    l = g</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">100000000</span>):</span><br><span class="line">    i + l</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">global_var</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">global</span> g</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">100000000</span>):</span><br><span class="line">    i + g</span><br></pre></td></tr></table></figure>
+<p>可以通过比较发现local_var会明显比global_var快一些. 为了分析原因,<br>我们可以用dis模块来分别反编译这两个函数的python中间代码:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">15</span>]: dis.dis(local_var)</span><br><span class="line">  <span class="number">3</span>           <span class="number">0</span> LOAD_GLOBAL              <span class="number">0</span> (g)</span><br><span class="line">              <span class="number">2</span> STORE_FAST               <span class="number">0</span> (l)</span><br><span class="line"></span><br><span class="line">  <span class="number">4</span>           <span class="number">4</span> LOAD_GLOBAL              <span class="number">1</span> (range)</span><br><span class="line">              <span class="number">6</span> LOAD_CONST               <span class="number">1</span> (<span class="number">1000000</span>)</span><br><span class="line">              <span class="number">8</span> CALL_FUNCTION            <span class="number">1</span></span><br><span class="line">             <span class="number">10</span> GET_ITER</span><br><span class="line">        &gt;&gt;   <span class="number">12</span> FOR_ITER                <span class="number">12</span> (to <span class="number">26</span>)</span><br><span class="line">             <span class="number">14</span> STORE_FAST               <span class="number">1</span> (i)</span><br><span class="line"></span><br><span class="line">  <span class="number">5</span>          <span class="number">16</span> LOAD_FAST                <span class="number">1</span> (i)</span><br><span class="line">             <span class="number">18</span> LOAD_FAST                <span class="number">0</span> (l)</span><br><span class="line">             <span class="number">20</span> BINARY_ADD</span><br><span class="line">             <span class="number">22</span> POP_TOP</span><br><span class="line">             <span class="number">24</span> JUMP_ABSOLUTE           <span class="number">12</span></span><br><span class="line">        &gt;&gt;   <span class="number">26</span> LOAD_CONST               <span class="number">0</span> (<span class="keyword">None</span>)</span><br><span class="line">             <span class="number">28</span> RETURN_VALUE</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">17</span>]: dis.dis(global_var)</span><br><span class="line">  <span class="number">3</span>           <span class="number">0</span> LOAD_GLOBAL              <span class="number">0</span> (range)</span><br><span class="line">              <span class="number">2</span> LOAD_CONST               <span class="number">1</span> (<span class="number">1000000</span>)</span><br><span class="line">              <span class="number">4</span> CALL_FUNCTION            <span class="number">1</span></span><br><span class="line">              <span class="number">6</span> GET_ITER</span><br><span class="line">        &gt;&gt;    <span class="number">8</span> FOR_ITER                <span class="number">12</span> (to <span class="number">22</span>)</span><br><span class="line">             <span class="number">10</span> STORE_FAST               <span class="number">0</span> (i)</span><br><span class="line"></span><br><span class="line">  <span class="number">4</span>          <span class="number">12</span> LOAD_FAST                <span class="number">0</span> (i)</span><br><span class="line">             <span class="number">14</span> LOAD_GLOBAL              <span class="number">1</span> (g)</span><br><span class="line">             <span class="number">16</span> BINARY_ADD</span><br><span class="line">             <span class="number">18</span> POP_TOP</span><br><span class="line">             <span class="number">20</span> JUMP_ABSOLUTE            <span class="number">8</span></span><br><span class="line">        &gt;&gt;   <span class="number">22</span> LOAD_CONST               <span class="number">0</span> (<span class="keyword">None</span>)</span><br><span class="line">             <span class="number">24</span> RETURN_VALUE</span><br></pre></td></tr></table></figure>
+<p>比较发现, 两个函数的主要区别在与循环中, local_var使用的是LOAD_FAST指令,<br>而global_var中使用的是LOAD_GLOBAL指令. 在python的解释器执行中,<br>因为LOAD_GLOBAL要在全局的字典中进行查找, 所以LOAD_GLOBAL要比LOAD_FAST慢不少.<br>这应该就是采用局部变量之一优化方法可以让python程序更快的原因了.</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://blog.csdn.net/socrates/article/details/104038372" target="_blank" rel="noopener">为什么在Python代码中使用局部变量会更快</a></p>
 
       
     </div>
@@ -450,7 +455,7 @@
           
             <a href="/tags/python/" rel="tag"># python</a>
           
-            <a href="/tags/regular-expression/" rel="tag"># regular expression</a>
+            <a href="/tags/python-package/" rel="tag"># python package</a>
           
         </div>
       
@@ -463,8 +468,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/02/latex/" rel="next" title="Latex Tutorial">
-                <i class="fa fa-chevron-left"></i> Latex Tutorial
+              <a href="/2020/11/02/让你python代码更快的3个小技巧/" rel="next" title="让你Python代码更快的3个小技巧">
+                <i class="fa fa-chevron-left"></i> 让你Python代码更快的3个小技巧
               </a>
             
           </div>
@@ -472,10 +477,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/04/04/gif-on-mac/" rel="prev" title="Gif on Mac">
-                Gif on Mac <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -519,8 +520,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -624,6 +634,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Python中dis的用法"><span class="nav-number">1.</span> <span class="nav-text">Python中dis的用法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">1.1.</span> <span class="nav-text">Reference</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       

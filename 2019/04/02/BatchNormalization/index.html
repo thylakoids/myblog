@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="Dracarys">
 <meta property="og:description" content="Why do we need batch normalization?We normalize the input layer by adjusting and scaling the activations. For example, when we have features from 0 to 1 and some from 1 to 1000, we should normalize th">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-04T04:33:08.000Z">
+<meta property="og:updated_time" content="2020-09-26T08:41:05.915Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="BatchNormalization">
 <meta name="twitter:description" content="Why do we need batch normalization?We normalize the input layer by adjusting and scaling the activations. For example, when we have features from 0 to 1 and some from 1 to 1000, we should normalize th">
@@ -383,7 +383,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-04-04 12:33:08" itemprop="dateModified" datetime="2019-04-04T12:33:08+08:00">2019-04-04</time>
+                <time title="修改时间：2020-09-26 16:41:05" itemprop="dateModified" datetime="2020-09-26T16:41:05+08:00">2020-09-26</time>
               
             
           </span>
@@ -440,7 +440,7 @@
 <p>Also, batch normalization allows each layer of a network to learn by itself a little bit more independently of other layers.</p>
 <h2 id="How-dose-batch-normalization-work"><a href="#How-dose-batch-normalization-work" class="headerlink" title="How dose batch normalization work?"></a>How dose batch normalization work?</h2><p>Batch normalization layer is usually used <strong>before</strong> the activation layer.</p>
 <p>The basic idea is doing the normalization then applying a linear and shif to the mini-batch:</p>
-<p>For input mini-batch <script type="math/tex">B = \{x_{1, ..., m}\}</script>, we want to learn the parameter $\gamma$ and $\beta$. The output of the layer is <script type="math/tex">\{y_i = BN_{\gamma, \beta}(x_i)\}</script>, where:</p>
+<p>For input mini-batch $B = {x<em>{1, …, m}}$, we want to learn the parameter $\gamma$ and $\beta$. The output of the layer is ${y_i = BN</em>{\gamma, \beta}(x_i)}$, where:</p>
 <script type="math/tex; mode=display">\mu_B \leftarrow \frac{1}{m}\sum_{i = 1}^{m}x_i</script><script type="math/tex; mode=display">\sigma_B^2 \leftarrow \frac{1}{m}\sum_{i=1}^m(x_i - \mu_B)^2</script><script type="math/tex; mode=display">\hat{x_i} \leftarrow \frac{x_i - \mu_B}{\sqrt{\sigma_B^2 + \epsilon}}</script><script type="math/tex; mode=display">y_i \leftarrow \gamma \hat{x_i} + \beta \equiv BN_{\gamma,\beta}(x_i)</script><p><strong>Usual batchnorm</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># t is the incoming tensor of shape [B, H, W, C]</span></span><br><span class="line"><span class="comment"># mean and stddev are computed along 0 axis and have shape [H, W, C]</span></span><br><span class="line">mean = mean(t, axis=<span class="number">0</span>)</span><br><span class="line">stddev = stddev(t, axis=<span class="number">0</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">0.</span>.B<span class="number">-1</span>:</span><br><span class="line">  out[i,:,:,:] = norm(t[i,:,:,:], mean, stddev)</span><br></pre></td></tr></table></figure></p>
 <p>Ba/sically, it computes <code>H*W*C</code> means and <code>H*W*C</code> standard deviations across B<br>elements. You may notice that different elements at different spatial locations<br>have their own mean and variance and gather only <code>B</code> values.</p>
 <p><strong>Batchnorm in conv layer</strong></p>
@@ -581,7 +581,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-count">15</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -602,7 +602,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">4</span>
+                      
+                    
+                    <span class="site-state-item-count">5</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -639,7 +641,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">12</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">14</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -696,7 +702,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>

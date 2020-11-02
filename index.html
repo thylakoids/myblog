@@ -319,6 +319,357 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/02/python-dis-模块/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="thylakoids">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dracarys">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2020/11/02/python-dis-模块/" class="post-title-link" itemprop="url">Python Dis 模块</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-11-02 16:11:05 / 修改时间：21:53:56" itemprop="dateCreated datePublished" datetime="2020-11-02T16:11:05+08:00">2020-11-02</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Python中dis的用法"><a href="#Python中dis的用法" class="headerlink" title="Python中dis的用法"></a>Python中dis的用法</h1><p>dis库是python(默认的CPython)自带的一个库,可以用来分析[字节码][字节码]</p>
+<p>利用dis来分析全局变量和局部变量运行效率.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">g = <span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">local_var</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">global</span> g</span><br><span class="line">    l = g</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">100000000</span>):</span><br><span class="line">    i + l</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">global_var</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">global</span> g</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">100000000</span>):</span><br><span class="line">    i + g</span><br></pre></td></tr></table></figure>
+<p>可以通过比较发现local_var会明显比global_var快一些. 为了分析原因,<br>我们可以用dis模块来分别反编译这两个函数的python中间代码:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">15</span>]: dis.dis(local_var)</span><br><span class="line">  <span class="number">3</span>           <span class="number">0</span> LOAD_GLOBAL              <span class="number">0</span> (g)</span><br><span class="line">              <span class="number">2</span> STORE_FAST               <span class="number">0</span> (l)</span><br><span class="line"></span><br><span class="line">  <span class="number">4</span>           <span class="number">4</span> LOAD_GLOBAL              <span class="number">1</span> (range)</span><br><span class="line">              <span class="number">6</span> LOAD_CONST               <span class="number">1</span> (<span class="number">1000000</span>)</span><br><span class="line">              <span class="number">8</span> CALL_FUNCTION            <span class="number">1</span></span><br><span class="line">             <span class="number">10</span> GET_ITER</span><br><span class="line">        &gt;&gt;   <span class="number">12</span> FOR_ITER                <span class="number">12</span> (to <span class="number">26</span>)</span><br><span class="line">             <span class="number">14</span> STORE_FAST               <span class="number">1</span> (i)</span><br><span class="line"></span><br><span class="line">  <span class="number">5</span>          <span class="number">16</span> LOAD_FAST                <span class="number">1</span> (i)</span><br><span class="line">             <span class="number">18</span> LOAD_FAST                <span class="number">0</span> (l)</span><br><span class="line">             <span class="number">20</span> BINARY_ADD</span><br><span class="line">             <span class="number">22</span> POP_TOP</span><br><span class="line">             <span class="number">24</span> JUMP_ABSOLUTE           <span class="number">12</span></span><br><span class="line">        &gt;&gt;   <span class="number">26</span> LOAD_CONST               <span class="number">0</span> (<span class="keyword">None</span>)</span><br><span class="line">             <span class="number">28</span> RETURN_VALUE</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">17</span>]: dis.dis(global_var)</span><br><span class="line">  <span class="number">3</span>           <span class="number">0</span> LOAD_GLOBAL              <span class="number">0</span> (range)</span><br><span class="line">              <span class="number">2</span> LOAD_CONST               <span class="number">1</span> (<span class="number">1000000</span>)</span><br><span class="line">              <span class="number">4</span> CALL_FUNCTION            <span class="number">1</span></span><br><span class="line">              <span class="number">6</span> GET_ITER</span><br><span class="line">        &gt;&gt;    <span class="number">8</span> FOR_ITER                <span class="number">12</span> (to <span class="number">22</span>)</span><br><span class="line">             <span class="number">10</span> STORE_FAST               <span class="number">0</span> (i)</span><br><span class="line"></span><br><span class="line">  <span class="number">4</span>          <span class="number">12</span> LOAD_FAST                <span class="number">0</span> (i)</span><br><span class="line">             <span class="number">14</span> LOAD_GLOBAL              <span class="number">1</span> (g)</span><br><span class="line">             <span class="number">16</span> BINARY_ADD</span><br><span class="line">             <span class="number">18</span> POP_TOP</span><br><span class="line">             <span class="number">20</span> JUMP_ABSOLUTE            <span class="number">8</span></span><br><span class="line">        &gt;&gt;   <span class="number">22</span> LOAD_CONST               <span class="number">0</span> (<span class="keyword">None</span>)</span><br><span class="line">             <span class="number">24</span> RETURN_VALUE</span><br></pre></td></tr></table></figure>
+<p>比较发现, 两个函数的主要区别在与循环中, local_var使用的是LOAD_FAST指令,<br>而global_var中使用的是LOAD_GLOBAL指令. 在python的解释器执行中,<br>因为LOAD_GLOBAL要在全局的字典中进行查找, 所以LOAD_GLOBAL要比LOAD_FAST慢不少.<br>这应该就是采用局部变量之一优化方法可以让python程序更快的原因了.</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://blog.csdn.net/socrates/article/details/104038372" target="_blank" rel="noopener">为什么在Python代码中使用局部变量会更快</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/02/让你python代码更快的3个小技巧/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="thylakoids">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dracarys">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2020/11/02/让你python代码更快的3个小技巧/" class="post-title-link" itemprop="url">让你Python代码更快的3个小技巧</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-11-02 15:36:02 / 修改时间：16:09:12" itemprop="dateCreated datePublished" datetime="2020-11-02T15:36:02+08:00">2020-11-02</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Python 语言的优点可以列举出许多，语法简单易懂、模块丰富、应用广泛等等。但是世界上没有有完美的东西，python 一个明显缺点就是运行速度慢，至少跟 C 语言没法比。</p>
+<p>所以，不安于现状的 Pythoner 就开发了许多工具。其中，最著名的莫过于 Cython 和 Numba。其中 Cython 可以把 Python 代码转成 C 代码执行，而 Numba 则是 Python 中的一个 JIT 编译器（即时编译器），以此提高运行效率。</p>
+<p>除此之外还有一些简单的小技巧可以帮助你提供python运行速度.</p>
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><p>函数可以提高代码的可读性，那么用了函数对程序的执行效率是否有影响呢？我们来做个对比实验。</p>
+<p>先来看一个不用函数的版本：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line">start = time.time()    <span class="comment"># 开始计时</span></span><br><span class="line">lst = []    <span class="comment"># 定义一个空列表</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">10000000</span>):</span><br><span class="line">    lst.append(math.sqrt(i))    <span class="comment"># 疯狂地往列表里添加计算结果</span></span><br><span class="line">end = time.time()    <span class="comment"># 停止计时</span></span><br><span class="line">print(end-start)</span><br></pre></td></tr></table></figure>
+<p>此代码在我的电脑上输出为 2.124（不同配置的电脑结果不一样，可多次运行取平均值）。再来加上函数试一下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">()</span>:</span></span><br><span class="line">    lst = []   <span class="comment"># 定义一个空列表</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">10000000</span>):</span><br><span class="line">        lst.append(math.sqrt(i))   <span class="comment"># 疯狂地往列表里添加计算结果</span></span><br><span class="line">    <span class="keyword">return</span> lst   <span class="comment"># 返回结果</span></span><br><span class="line"></span><br><span class="line">start = time.time()   <span class="comment"># 开始计时</span></span><br><span class="line">lst = func()   </span><br><span class="line">end = time.time()   <span class="comment"># 停止计时</span></span><br><span class="line">print(end-start)</span><br></pre></td></tr></table></figure></p>
+<p>在我的电脑上，使用了函数的程序用了大概花了 1.743 秒。多次尝试，基本上都会比上一个版本节省 15~20% 左右时间，这个差距还是存在的。</p>
+<p>有人可能会觉得，增加了函数调用，效率可能会低。但实际上，我们这里只是增加了一次调用，影响甚微。而由于<a href="https://www.baidu.com" target="_blank" rel="noopener"><strong>Python 中局部变量和全局变量的实现方式不同，使用局部变量效率会高些</strong></a>。</p>
+<p>所以使用函数不仅提高可读性，用得好还能让代码运行得更快。</p>
+<h3 id="去掉属性访问"><a href="#去掉属性访问" class="headerlink" title="去掉属性访问"></a>去掉属性访问</h3><p>再来看另一个例子，还是刚才的函数版本，我们做一点修改，改变其中导入函数的方式，由 math.sqrt 改为 sqrt：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> math <span class="keyword">import</span> sqrt   <span class="comment"># 直接引用特定函数或属性</span></span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">()</span>:</span></span><br><span class="line">    lst = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">10000000</span>):</span><br><span class="line">        lst.append(sqrt(i))    <span class="comment"># 直接调用 sqrt</span></span><br><span class="line">    <span class="keyword">return</span> lst</span><br><span class="line"></span><br><span class="line">start = time.time()</span><br><span class="line">lst = func()</span><br><span class="line">end = time.time()</span><br><span class="line">print(end-start)</span><br></pre></td></tr></table></figure></p>
+<p>在其它代码均没有变动的情况下，这个程序的输出时间变成了……</p>
+<p>1.413 秒!</p>
+<p>居然更快了。这又是为什么呢？</p>
+<p>因为在进行属性访问的时候啊，会调用这个对象的 <code>__getattribute__</code> 或者 <code>__getattr__</code> 方法，造成了额外的开销，所以导致速度变慢。</p>
+<p>所以可以进一步把上面的代码改为</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> math <span class="keyword">import</span> sqrt   <span class="comment"># 直接引用特定函数或属性</span></span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">()</span>:</span></span><br><span class="line">    lst = []</span><br><span class="line">    append = lst.append</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">10000000</span>):</span><br><span class="line">        append(sqrt(i))    <span class="comment"># 直接调用 sqrt</span></span><br><span class="line">    <span class="keyword">return</span> lst</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">start = time.time()</span><br><span class="line">lst = func()</span><br><span class="line">end = time.time()</span><br><span class="line">print(end - start)</span><br></pre></td></tr></table></figure>
+<h3 id="列表推导式"><a href="#列表推导式" class="headerlink" title="列表推导式"></a>列表推导式</h3><p>最后再来看看列表推导式（List Comprehension），它的效率和普通 for 循环会有不一样吗？</p>
+<p>继续在上一个版本上修改：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> math <span class="keyword">import</span> sqrt</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="comment"># for 循环改为列表推导式</span></span><br><span class="line">    lst = [sqrt(i) <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">10000000</span>)]</span><br><span class="line">    <span class="keyword">return</span> lst</span><br><span class="line"></span><br><span class="line">start = time.time()</span><br><span class="line">lst = func()</span><br><span class="line">end = time.time()</span><br><span class="line">print(end-start)</span><br></pre></td></tr></table></figure>
+<p>结果是 0.968 秒！</p>
+<p>这又是为什么呢？因为列表推导式内的迭代是 C 实现的，所以效率更高。</p>
+<p>同最初的版本相比，实现同样的效果，我们仅通过调整代码的写法，速度就提高了一倍还多。</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://mp.weixin.qq.com/s/RwqgT0gWM4IZ2NTlyl2_Hg" target="_blank" rel="noopener">让你python代码更快的3个小技巧(裸睡的猪)</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/16/DCGAN/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1617,358 +1968,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/02/latex/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="thylakoids">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Dracarys">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/04/02/latex/" class="post-title-link" itemprop="url">Latex Tutorial</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-04-02 14:32:18 / 修改时间：20:16:47" itemprop="dateCreated datePublished" datetime="2019-04-02T14:32:18+08:00">2019-04-02</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="实现中英文混排"><a href="#实现中英文混排" class="headerlink" title="实现中英文混排"></a>实现中英文混排</h2><p><a href="https://www.kancloud.cn/thinkphp/latex/41810" target="_blank" rel="noopener">实现中英文混排·一份其实很短的latex入门文档</a></p>
-<ol>
-<li><p>使用XeLateX, 配置vimtex如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let g:Tex_CompileRule_pdf = &apos;xelatex --interaction=nonstopmode $*&apos;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>tex文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">\documentclass&#123;article&#125;</span><br><span class="line">\usepackage[UTF8]&#123;ctex&#125;</span><br><span class="line">\begin&#123;document&#125;</span><br><span class="line">你好\textbf&#123;xxxx&#125;xxx\textit&#123;xxx&#125;\underline&#123;xxx&#125;</span><br><span class="line">\end&#123;document&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="latex-如何插入参考文献"><a href="#latex-如何插入参考文献" class="headerlink" title="latex 如何插入参考文献"></a>latex 如何插入参考文献</h2><h2 id="如何生成和加载latex模版"><a href="#如何生成和加载latex模版" class="headerlink" title="如何生成和加载latex模版"></a>如何生成和加载latex模版</h2>
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/02/BatchNormalization/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="thylakoids">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Dracarys">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/04/02/BatchNormalization/" class="post-title-link" itemprop="url">BatchNormalization</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-04-02 14:11:23" itemprop="dateCreated datePublished" datetime="2019-04-02T14:11:23+08:00">2019-04-02</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-04-04 12:33:08" itemprop="dateModified" datetime="2019-04-04T12:33:08+08:00">2019-04-04</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/deep-learning/" itemprop="url" rel="index"><span itemprop="name">deep learning</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Why-do-we-need-batch-normalization"><a href="#Why-do-we-need-batch-normalization" class="headerlink" title="Why do we need batch normalization?"></a>Why do we need batch normalization?</h2><p>We normalize the input layer by adjusting and scaling the activations. For example, when we have features from 0 to 1 and some from 1 to 1000, we should normalize them to speed up learning. If the input layer is benefiting from it, why not do the same thing also for the values in the hidden layers, that are changing all the time, and get 10 times or more improvement in the training speed.</p>
-<p>Batch normalization reduces the amount by what the hidden unit values shift around (covariance shift). To explain covariance shift, let’s have a deep network on cat detection. We train our data on only black cats’ images. So, if we now try to apply this network to data with colored cats, it is obvious; we’re not going to do well. The training set and the prediction set are both cats’ images but they differ a little bit. In other words, if an algorithm learned some X to Y mapping, and if the distribution of X changes, then we might need to retrain the learning algorithm by trying to align the distribution of X with the distribution of Y. ( Deeplearning.ai: Why Does Batch Norm Work?<a href="https://www.youtube.com/watch?v=nUUqwaxLnWs" target="_blank" rel="noopener">C2W3L06</a></p>
-<p>Also, batch normalization allows each layer of a network to learn by itself a little bit more independently of other layers.</p>
-<h2 id="How-dose-batch-normalization-work"><a href="#How-dose-batch-normalization-work" class="headerlink" title="How dose batch normalization work?"></a>How dose batch normalization work?</h2><p>Batch normalization layer is usually used <strong>before</strong> the activation layer.</p>
-<p>The basic idea is doing the normalization then applying a linear and shif to the mini-batch:</p>
-<p>For input mini-batch <script type="math/tex">B = \{x_{1, ..., m}\}</script>, we want to learn the parameter $\gamma$ and $\beta$. The output of the layer is <script type="math/tex">\{y_i = BN_{\gamma, \beta}(x_i)\}</script>, where:</p>
-<script type="math/tex; mode=display">\mu_B \leftarrow \frac{1}{m}\sum_{i = 1}^{m}x_i</script><script type="math/tex; mode=display">\sigma_B^2 \leftarrow \frac{1}{m}\sum_{i=1}^m(x_i - \mu_B)^2</script><script type="math/tex; mode=display">\hat{x_i} \leftarrow \frac{x_i - \mu_B}{\sqrt{\sigma_B^2 + \epsilon}}</script><script type="math/tex; mode=display">y_i \leftarrow \gamma \hat{x_i} + \beta \equiv BN_{\gamma,\beta}(x_i)</script><p><strong>Usual batchnorm</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># t is the incoming tensor of shape [B, H, W, C]</span></span><br><span class="line"><span class="comment"># mean and stddev are computed along 0 axis and have shape [H, W, C]</span></span><br><span class="line">mean = mean(t, axis=<span class="number">0</span>)</span><br><span class="line">stddev = stddev(t, axis=<span class="number">0</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">0.</span>.B<span class="number">-1</span>:</span><br><span class="line">  out[i,:,:,:] = norm(t[i,:,:,:], mean, stddev)</span><br></pre></td></tr></table></figure></p>
-<p>Ba/sically, it computes <code>H*W*C</code> means and <code>H*W*C</code> standard deviations across B<br>elements. You may notice that different elements at different spatial locations<br>have their own mean and variance and gather only <code>B</code> values.</p>
-<p><strong>Batchnorm in conv layer</strong></p>
-<p>This way is totally possible. But the convolutional layer has a special property: filter weights are shared across the input image (you can read it in detail in this <a href="http://cs231n.github.io/convolutional-networks/#conv" target="_blank" rel="noopener">post</a>. That’s why it’s reasonable to normalize the output in the same way, so that each output value takes the mean and variance of B<em>H</em>W values, at different locations.</p>
-<p>Here’s how the code looks like in this case (again pseudo-code):<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># t is still the incoming tensor of shape [B, H, W, C]</span></span><br><span class="line"><span class="comment"># but mean and stddev are computed along (0, 1, 2) axes and have just [C] shape</span></span><br><span class="line">mean = mean(t, axis=(<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>))</span><br><span class="line">stddev = stddev(t, axis=(<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>))</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">0.</span>.B<span class="number">-1</span>, x <span class="keyword">in</span> <span class="number">0.</span>.H<span class="number">-1</span>, y <span class="keyword">in</span> <span class="number">0.</span>.W<span class="number">-1</span>:</span><br><span class="line">  out[i,x,y,:] = norm(t[i,x,y,:], mean, stddev)</span><br></pre></td></tr></table></figure></p>
-<p>In total, there are only <code>C</code> means and standard deviations and each one of them is computed over <code>B*H*W</code> values. That’s what they mean when they say “effective mini-batch”: the difference between the two is only in axis selection (or equivalently “mini-batch selection”).</p>
-<h2 id="Batch-Normalization-in-Pytorch"><a href="#Batch-Normalization-in-Pytorch" class="headerlink" title="Batch Normalization in Pytorch"></a>Batch Normalization in Pytorch</h2><p> <a href="https://kratzert.github.io/2016/02/12/understanding-the-gradient-flow-through-the-batch-normalization-layer.html" target="_blank" rel="noopener">This link</a> provides a nice explanation of how to derive backpropagation gradients for batch normalization. Let’s see it in action now:</p>
-<p> <strong>Batch Normalization for 2D data</strong></p>
-<p> Let’s start with 1D normalization.<br> <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"><span class="keyword">from</span> torch.autograd <span class="keyword">import</span> Variable</span><br></pre></td></tr></table></figure></p>
-<p>Let’s define X and calculate its mean and variance. Note that X has size (20,100) which means it has 20 samples with each sample having 100 features (or dimensions). For normalizing, we need to look across all samples. In other words, we normalize across 20 values for each dimension (with each value coming on a sample).<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">X = torch.randn(<span class="number">20</span>,<span class="number">100</span>) * <span class="number">5</span> + <span class="number">10</span></span><br><span class="line">X = Variable(X)</span><br><span class="line"></span><br><span class="line">mu = torch.mean(X[:,<span class="number">1</span>])</span><br><span class="line">var_ = torch.var(X[:,<span class="number">1</span>], unbiased=<span class="keyword">False</span>)</span><br><span class="line">sigma = torch.sqrt(var_ + <span class="number">1e-5</span>)</span><br><span class="line">x = (X[:,<span class="number">1</span>] - mu)/sigma</span><br></pre></td></tr></table></figure></p>
-<p>Note that in the line above we set unbiased = False while calculating var_. This is to prevent Bessel’s correction. In other words, we want to divide by N and not N-1 while calculating the variance. x is the same as the result of batch normalization. Also note that in the code below we set affine = False. This is to prevent creation of parameters γ(k), β(k) which may scale and shift normalized data again. While training, affine is set to True.<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">B = nn.BatchNorm1d(<span class="number">100</span>, affine=<span class="keyword">False</span>)</span><br><span class="line">y = B(X)</span><br><span class="line">print(x.data / y[:,<span class="number">1</span>].data)</span><br></pre></td></tr></table></figure></p>
-<p>Output:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1.0000</span><br><span class="line">1.0000</span><br><span class="line">1.0000</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
-<p>This also works for 3D input.</p>
-<p><strong>Batch Normalization for 3D inputs</strong></p>
-<p>Let’s define some 3D data with 4 and variance 4:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x3 = torch.randn(<span class="number">150</span>, <span class="number">20</span>, <span class="number">100</span>) * <span class="number">2</span> + <span class="number">4</span></span><br><span class="line">x3 = Variable(x3)</span><br><span class="line">B2 = nn.BatchNorm1d(<span class="number">20</span>)</span><br></pre></td></tr></table></figure></p>
-<p>Note that here we did not set <code>affine = False</code>. Instead, we can manually set<br>those values to what we want. To preserve normalization, we want    γ(k) = 1 and<br>β(k) = 0. These values are stored in parameters weight and bias of the<br>BatchNorm variable.<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">B2.weight.data.fill_(<span class="number">1</span>)</span><br><span class="line">B2.bias.data.fill_(<span class="number">0</span>)</span><br><span class="line">Y = B2(X3)</span><br><span class="line"></span><br><span class="line"><span class="comment">#Manual calculation</span></span><br><span class="line">mu = X3[:,<span class="number">0</span>,:].mean()</span><br><span class="line">sigma = torch.sqrt(torch.var(X3[:,<span class="number">0</span>,:], unbiased=<span class="keyword">False</span>) + <span class="number">1e-5</span>)</span><br><span class="line">X_normalized = (X3[:,<span class="number">0</span>,:] - mu)/sigma</span><br></pre></td></tr></table></figure></p>
-<p>In the above example, X_normalized has the same values as Y[:,0,:].</p>
-<p><strong>Batch Normalization for images(or any 4D input)</strong></p>
-<p>A batch of RGB images has four dimensions: (B,C,X,Y) or (B,X,Y,C) where B is batch number, C is channel number, and X, Y are locations.</p>
-<p>Batch normalization in images is done along the channel axis.<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">X = torch.randn(<span class="number">5</span>,<span class="number">25</span>,<span class="number">100</span>,<span class="number">100</span>) * <span class="number">2</span> + <span class="number">4</span></span><br><span class="line">X = Variable(X)</span><br><span class="line">B = nn.BatchNorm2d(<span class="number">25</span>, affine=<span class="keyword">False</span>)</span><br><span class="line">Y = B(X)</span><br></pre></td></tr></table></figure></p>
-<p>Here <code>Y[:,i,:,:]</code> is the same as <code>((X[:,i,:,:] - X[:,i,:,:].data.mean())/((X[:,i,:,:].data.var(unbiased=False) + 1e-5)**0.5))</code> for all valid values of.</p>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://towardsdatascience.com/batch-normalization-in-neural-networks-1ac91516821c" target="_blank" rel="noopener">Batch normalization in Neural Networks</a></p>
-<p><a href="https://stackoverflow.com/questions/38553927/batch-normalization-in-convolutional-neural-network" target="_blank" rel="noopener">Batch Normalization in Convolutional Neural Network</a></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2015,7 +2014,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-count">15</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2036,7 +2035,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">4</span>
+                      
+                    
+                    <span class="site-state-item-count">5</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -2075,7 +2076,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">13</span>
+                      
+                    
+                    <span class="site-state-item-count">14</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -2115,7 +2118,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
@@ -2259,11 +2262,11 @@
   
     
       
+    
+      
+    
+      
         
-      
-    
-      
-    
       
     
       
