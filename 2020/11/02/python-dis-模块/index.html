@@ -96,18 +96,18 @@
 
 
 
-  <meta name="description" content="Python中dis的用法dis库是python(默认的CPython)自带的一个库,可以用来分析[字节码][字节码] 利用dis来分析全局变量和局部变量运行效率. 123456789101112g = 2def local_var():    global g    l = g    for i in range(100000000):    i + ldef global_var():">
+  <meta name="description" content="Python中dis的用法dis库是python(默认的CPython)自带的一个库,可以用来分析字节码 利用dis来分析全局变量和局部变量运行效率. 123456789101112g = 2def local_var():    global g    l = g    for i in range(100000000):    i + ldef global_var():    global">
 <meta name="keywords" content="python,python package">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python Dis 模块">
 <meta property="og:url" content="http://yoursite.com/2020/11/02/python-dis-模块/index.html">
 <meta property="og:site_name" content="Dracarys">
-<meta property="og:description" content="Python中dis的用法dis库是python(默认的CPython)自带的一个库,可以用来分析[字节码][字节码] 利用dis来分析全局变量和局部变量运行效率. 123456789101112g = 2def local_var():    global g    l = g    for i in range(100000000):    i + ldef global_var():">
+<meta property="og:description" content="Python中dis的用法dis库是python(默认的CPython)自带的一个库,可以用来分析字节码 利用dis来分析全局变量和局部变量运行效率. 123456789101112g = 2def local_var():    global g    l = g    for i in range(100000000):    i + ldef global_var():    global">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-11-02T13:53:56.027Z">
+<meta property="og:updated_time" content="2020-11-02T14:00:29.276Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python Dis 模块">
-<meta name="twitter:description" content="Python中dis的用法dis库是python(默认的CPython)自带的一个库,可以用来分析[字节码][字节码] 利用dis来分析全局变量和局部变量运行效率. 123456789101112g = 2def local_var():    global g    l = g    for i in range(100000000):    i + ldef global_var():">
+<meta name="twitter:description" content="Python中dis的用法dis库是python(默认的CPython)自带的一个库,可以用来分析字节码 利用dis来分析全局变量和局部变量运行效率. 123456789101112g = 2def local_var():    global g    l = g    for i in range(100000000):    i + ldef global_var():    global">
 
 
 
@@ -366,7 +366,7 @@
                 
               
 
-              <time title="创建时间：2020-11-02 16:11:05 / 修改时间：21:53:56" itemprop="dateCreated datePublished" datetime="2020-11-02T16:11:05+08:00">2020-11-02</time>
+              <time title="创建时间：2020-11-02 16:11:05 / 修改时间：22:00:29" itemprop="dateCreated datePublished" datetime="2020-11-02T16:11:05+08:00">2020-11-02</time>
             
 
             
@@ -423,7 +423,7 @@
       
 
       
-        <h1 id="Python中dis的用法"><a href="#Python中dis的用法" class="headerlink" title="Python中dis的用法"></a>Python中dis的用法</h1><p>dis库是python(默认的CPython)自带的一个库,可以用来分析[字节码][字节码]</p>
+        <h1 id="Python中dis的用法"><a href="#Python中dis的用法" class="headerlink" title="Python中dis的用法"></a>Python中dis的用法</h1><p>dis库是python(默认的CPython)自带的一个库,可以用来分析<a href="https://blog.csdn.net/Leccen/article/details/106252953" target="_blank" rel="noopener">字节码</a></p>
 <p>利用dis来分析全局变量和局部变量运行效率.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">g = <span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">local_var</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">global</span> g</span><br><span class="line">    l = g</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">100000000</span>):</span><br><span class="line">    i + l</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">global_var</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">global</span> g</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">100000000</span>):</span><br><span class="line">    i + g</span><br></pre></td></tr></table></figure>
 <p>可以通过比较发现local_var会明显比global_var快一些. 为了分析原因,<br>我们可以用dis模块来分别反编译这两个函数的python中间代码:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">15</span>]: dis.dis(local_var)</span><br><span class="line">  <span class="number">3</span>           <span class="number">0</span> LOAD_GLOBAL              <span class="number">0</span> (g)</span><br><span class="line">              <span class="number">2</span> STORE_FAST               <span class="number">0</span> (l)</span><br><span class="line"></span><br><span class="line">  <span class="number">4</span>           <span class="number">4</span> LOAD_GLOBAL              <span class="number">1</span> (range)</span><br><span class="line">              <span class="number">6</span> LOAD_CONST               <span class="number">1</span> (<span class="number">1000000</span>)</span><br><span class="line">              <span class="number">8</span> CALL_FUNCTION            <span class="number">1</span></span><br><span class="line">             <span class="number">10</span> GET_ITER</span><br><span class="line">        &gt;&gt;   <span class="number">12</span> FOR_ITER                <span class="number">12</span> (to <span class="number">26</span>)</span><br><span class="line">             <span class="number">14</span> STORE_FAST               <span class="number">1</span> (i)</span><br><span class="line"></span><br><span class="line">  <span class="number">5</span>          <span class="number">16</span> LOAD_FAST                <span class="number">1</span> (i)</span><br><span class="line">             <span class="number">18</span> LOAD_FAST                <span class="number">0</span> (l)</span><br><span class="line">             <span class="number">20</span> BINARY_ADD</span><br><span class="line">             <span class="number">22</span> POP_TOP</span><br><span class="line">             <span class="number">24</span> JUMP_ABSOLUTE           <span class="number">12</span></span><br><span class="line">        &gt;&gt;   <span class="number">26</span> LOAD_CONST               <span class="number">0</span> (<span class="keyword">None</span>)</span><br><span class="line">             <span class="number">28</span> RETURN_VALUE</span><br></pre></td></tr></table></figure></p>
